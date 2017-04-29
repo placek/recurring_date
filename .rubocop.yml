@@ -19,8 +19,6 @@ Metrics/ClassLength:
   Enabled: false
 Metrics/BlockLength:
   Enabled: false
-Rails:
-  Enabled: true
 Style/Documentation:
   Enabled: false
 Style/AlignParameters:

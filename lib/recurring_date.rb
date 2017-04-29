@@ -10,7 +10,7 @@ class RecurringDate < Date
   end
 
   def self.now
-    parse(Time.zone.now.to_s)
+    parse(Time.now.to_s)
   end
 
   def inspect
