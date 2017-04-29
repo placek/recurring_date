@@ -43,6 +43,45 @@ describe RecurringDateEnumerator do
     it { expect(subject.map(&:yday)).to all(eq(150)) }
   end
 
+  describe '#not_year' do
+    subject { enumerator.not_year(2017).to_a }
+
+    it { expect(subject.map(&:year).uniq).to eq([2018]) }
+  end
+
+  describe '#not_month' do
+    subject { enumerator.not_month(4).to_a }
+
+    it { expect(subject.map(&:month).uniq).to eq([3, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2]) }
+  end
+
+  describe '#not_mweek' do
+    subject { enumerator.not_mweek(3).to_a }
+
+    it { expect(subject.map(&:mweek).uniq).to eq([1, 2, 4, 5]) }
+  end
+
+  describe '#not_wday' do
+    subject { enumerator.not_wday(5).to_a }
+
+    it { expect(subject.map(&:wday).uniq).to eq([3, 4, 6, 0, 1, 2]) }
+  end
+
+  describe '#not_mday' do
+    subject { enumerator.not_mday(15).to_a }
+
+    it do
+      expect(subject.map(&:mday).uniq).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16,
+                                              17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31])
+    end
+  end
+
+  describe '#not_yday' do
+    subject { enumerator.not_yday(150).to_a }
+
+    it { expect(subject.map(&:yday).uniq.any? { |e| e == 150 }).to eq(false) }
+  end
+
   describe '#take' do
     subject { enumerator.take(10).to_a }
 

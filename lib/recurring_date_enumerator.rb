@@ -12,27 +12,59 @@ class RecurringDateEnumerator < Enumerator
   end
 
   def yday(*args)
-    select { |date| args.include?(date.yday) }
+    matching(*args, &:yday)
   end
 
   def mday(*args)
-    select { |date| args.include?(date.mday) }
+    matching(*args, &:mday)
   end
 
   def wday(*args)
-    select { |date| args.include?(date.wday) }
+    matching(*args, &:wday)
   end
 
   def mweek(*args)
-    select { |date| args.include?(date.mweek) }
+    matching(*args, &:mweek)
   end
 
   def month(*args)
-    select { |date| args.include?(date.month) }
+    matching(*args, &:month)
   end
 
   def year(*args)
-    select { |date| args.include?(date.year) }
+    matching(*args, &:year)
+  end
+
+  def not_yday(*args)
+    not_matching(*args, &:yday)
+  end
+
+  def not_mday(*args)
+    not_matching(*args, &:mday)
+  end
+
+  def not_wday(*args)
+    not_matching(*args, &:wday)
+  end
+
+  def not_mweek(*args)
+    not_matching(*args, &:mweek)
+  end
+
+  def not_month(*args)
+    not_matching(*args, &:month)
+  end
+
+  def not_year(*args)
+    not_matching(*args, &:year)
+  end
+
+  def matching(*args)
+    select { |date| args.include?(yield(date)) }
+  end
+
+  def not_matching(*args)
+    reject { |date| args.include?(yield(date)) }
   end
 
   def pattern(*args)

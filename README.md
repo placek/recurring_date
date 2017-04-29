@@ -34,17 +34,20 @@ The enumerator implements bunch of chainable methods to provide simple DSL for s
 | every 13th of the month                                  | `enumerator.mday(13)`
 | every 21st and 23rd of the month                         | `enumerator.mday(21, 23)`
 | every Friday                                             | `enumerator.wday(5)`
-| every Saturday and Sunday                                | `enumerator.wday(6, 7)`
+| every Saturday and Sunday                                | `enumerator.wday(6, 0)`
+| every Saturday and Sunday                                | `enumerator.matching(6, 0) { |d| d.wday }`
+| every Saturday and Sunday                                | `enumerator.matching(6, 0, &:wday)`
 | every 4th day                                            | `enumerator.pattern(4)`
 | every 7th or 10th day                                    | `enumerator.pattern(7, 10)`
 | every second Friday                                      | `enumerator.wday(5).pattern(2)`
 | every 2nd Monday of the month                            | `enumerator.wday(1).mweek(2)`
-| 2nd and 4th Sunday of the month                          | `enumerator.wday(7).mweek(2,4)`
+| 2nd and 4th Sunday of the month                          | `enumerator.wday(0).mweek(2,4)`
 | 3rd Tuesday and Wednesday of the month                   | `enumerator.wday(2,3).mweek(3)`
 | until `date`                                             | `enumerator.until(date)`
 
 ###### NOTE
 
+* Every enumerator method has a corresponding method with `not_` prefix.
 * For `rails` models the pattern can be used to select records, like: `Model.where('column::date IN (?)', dates)`.
 
 ## Example
@@ -53,4 +56,4 @@ The enumerator implements bunch of chainable methods to provide simple DSL for s
     rule = RecurringDate.now.to_enum
     rule.wday(5).mweek(1).to_a                              # => all first Fridays of a month
     rule.pattern(2).until(RecurringDate.new(2020,8,1)).to_a # => every second day until 2020-08-01
-    rule.wday(6,7).mweek(2,4).take(8).to_a                  # => next four 2nd and 4th weekends of a month
+    rule.wday(6,0).mweek(2,4).take(8).to_a                  # => next four 2nd and 4th weekends of a month
