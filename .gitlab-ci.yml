@@ -1,0 +1,31 @@
+image: 'adgud2/ruby-rvm:latest'
+
+variables:
+
+cache:
+  key: "$CI_BUILD_REF_NAME"
+
+stages:
+  - build
+  - test
+
+before_script:
+  - rvm current
+  - bundle install --jobs $(nproc) --path /cache
+
+bundle install:
+  stage: build
+  before_script: []
+  script:
+    - rvm current
+    - bundle install --jobs $(nproc) --path /cache
+
+rspec:
+  stage: test
+  script:
+    - bundle exec rspec -fp
+
+rubocop:
+  stage: test
+  script:
+    - bundle exec rubocop
