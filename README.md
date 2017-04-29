@@ -47,7 +47,7 @@ The enumerator implements bunch of chainable methods to provide simple DSL for s
 
 ###### NOTE
 
-* Every enumerator method has a corresponding method with `not_` prefix.
+* Every enumerator method (except `take`, `take_while` and `until`) has a corresponding method with `not_` prefix.
 * For `rails` models the pattern can be used to select records, like: `Model.where('column::date IN (?)', dates)`.
 
 ## Example
