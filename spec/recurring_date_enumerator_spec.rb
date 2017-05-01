@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 
 describe RecurringDateEnumerator do
   let(:enumerator) { RecurringDateEnumerator.new(range) }
-  let(:range) { RecurringDate.new(2017, 3, 1)..RecurringDate.new(2018, 4, 1) }
+  let(:range) { Date.new(2017, 3, 1)..Date.new(2018, 4, 1) }
 
   it { expect(enumerator).to be_a(Enumerator) }
   it { expect(enumerator).to be_a(RecurringDateEnumerator) }
@@ -121,9 +121,9 @@ describe RecurringDateEnumerator do
   end
 
   describe '#until' do
-    subject { enumerator.until(RecurringDate.new(2018, 5, 1)).to_a }
+    subject { enumerator.until(Date.new(2018, 5, 1)).to_a }
 
-    it { expect(subject).to all(be <= RecurringDate.new(2018, 5, 1)) }
+    it { expect(subject).to all(be <= Date.new(2018, 5, 1)) }
   end
 
   describe '#pattern' do

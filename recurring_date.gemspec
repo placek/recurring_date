@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'recurring_date'
-  s.version     = '0.0.2'
-  s.date        = '2017-04-29'
+  s.version     = '0.0.3'
+  s.date        = '2017-05-01'
   s.summary     = 'Recurring dates enumerator'
   s.description = 'Enumerator for recurring dates with specific patterns'
   s.author      = 'Paweł Placzyński'

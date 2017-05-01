@@ -1,25 +1,15 @@
 require_relative 'recurring_date_enumerator'
 
-class RecurringDate < Date
+module RecurringDate
   def mweek
     (mday - 1) / 7 + 1
   end
 
   def to_enum
-    RecurringDateEnumerator.new(self..distant_future)
+    RecurringDateEnumerator.eternity(from: self)
   end
+end
 
-  def self.now
-    parse(Time.now.to_s)
-  end
-
-  def inspect
-    to_s
-  end
-
-  private
-
-  def distant_future
-    RecurringDate.new(year + 1000)
-  end
+class Date
+  include RecurringDate
 end

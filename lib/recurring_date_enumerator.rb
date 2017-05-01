@@ -11,6 +11,10 @@ class RecurringDateEnumerator < Enumerator
     end
   end
 
+  def self.eternity(from: Date.new(1970))
+    RecurringDateEnumerator.new(infinity(from))
+  end
+
   def yday(*args)
     matching(*args, &:yday)
   end
@@ -113,5 +117,12 @@ class RecurringDateEnumerator < Enumerator
 
   def inspect
     ['#<RecurringDateEnumerator: 0x', object_id, '>'].join
+  end
+
+  def self.infinity(date)
+    Enumerator.new do |y|
+      i = date.prev_day
+      loop { y << (i = i.next) }
+    end
   end
 end
