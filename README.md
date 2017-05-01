@@ -13,7 +13,7 @@ The enumerator operates on objects that implements the `Enumerator#each` and yie
 | Method     | Description
 |------------|-------------
 | `#mweek`   | Returns a number - n'th occurence of the week day in the month.
-| `#to_enum` | Returns `RecurringDateEnumerator` enumerator with given range from `self` to 1000 years form now.
+| `#to_enum` | Returns `RecurringDateEnumerator` enumerator with given range from `self` iterating forever (infinite set).
 
 ## `RecurringDateEnumerator`
 
