@@ -119,6 +119,8 @@ class RecurringDateEnumerator < Enumerator
     ['#<RecurringDateEnumerator: 0x', object_id, '>'].join
   end
 
+  private
+
   def self.infinity(date)
     Enumerator.new do |y|
       i = date.prev_day
