@@ -11,8 +11,12 @@ class RecurringDateEnumerator < Enumerator
     end
   end
 
-  def self.eternity(from: Date.new(1970))
-    RecurringDateEnumerator.new(infinity(from))
+  def self.eternity
+    from(Date.new(1970))
+  end
+
+  def self.from(date)
+    RecurringDateEnumerator.new(infinity(date))
   end
 
   def yday(*args)

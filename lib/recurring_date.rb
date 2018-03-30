@@ -6,7 +6,7 @@ module RecurringDate
   end
 
   def to_enum
-    RecurringDateEnumerator.eternity(from: self)
+    RecurringDateEnumerator.from(self)
   end
 end
 
