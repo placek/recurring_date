@@ -10,11 +10,11 @@ Gem::Specification.new do |spec|
 
   spec.summary     = %q{Dates enumerator with conditions}
   spec.description = %q{Iterate over a set of dates, giving an iteration conditions.}
-  spec.homepage    = 'https://gitlab.binarapps.com/placek/recurring_date'
+  spec.homepage    = 'https://github.com/placek/recurring_date'
 
   if spec.respond_to?(:metadata)
     spec.metadata['homepage_uri']    = spec.homepage
-    spec.metadata['source_code_uri'] = 'https://gitlab.binarapps.com/placek/recurring_date'
+    spec.metadata['source_code_uri'] = 'https://github.com/placek/recurring_date'
   else
     raise 'RubyGems 2.0 or newer is required to protect against public gem pushes.'
   end
