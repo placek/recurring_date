@@ -1,5 +1,7 @@
 # recurring_date
 
+[![Build Status](https://travis-ci.org/placek/recurring_date.svg?branch=master)](https://travis-ci.org/placek/recurring_date)
+
 Iterate over a set of dates, giving an iteration conditions.
 
 This gem provides an enumerator `RecurringDate::Enumerator`, selecting specific dates due to the recursion pattern.
