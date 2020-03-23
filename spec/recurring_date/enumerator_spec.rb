@@ -1,11 +1,9 @@
-require_relative 'spec_helper'
-
-describe RecurringDateEnumerator do
-  let(:enumerator) { RecurringDateEnumerator.new(range) }
-  let(:range) { Date.new(2017, 3, 1)..Date.new(2018, 4, 1) }
+RSpec.describe RecurringDate::Enumerator do
+  let(:enumerator) { described_class.new(range) }
+  let(:range)      { Date.new(2017, 3, 1)..Date.new(2018, 4, 1) }
 
   it { expect(enumerator).to be_a(Enumerator) }
-  it { expect(enumerator).to be_a(RecurringDateEnumerator) }
+  it { expect(enumerator).to be_a(RecurringDate::Enumerator) }
 
   describe '#year' do
     subject { enumerator.year(2017).to_a }

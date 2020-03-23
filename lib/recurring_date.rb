@@ -1,4 +1,4 @@
-require_relative 'recurring_date_enumerator'
+require 'recurring_date/enumerator'
 
 module RecurringDate
   def mweek
@@ -6,7 +6,7 @@ module RecurringDate
   end
 
   def to_enum
-    RecurringDateEnumerator.from(self)
+    RecurringDate::Enumerator.from(self)
   end
 end
 

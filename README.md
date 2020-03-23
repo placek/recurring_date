@@ -15,7 +15,7 @@ The enumerator operates on objects that implements the `Enumerator#each` and yie
 | `#mweek`   | Returns a number - n'th occurence of the week day in the month.
 | `#to_enum` | Returns `RecurringDateEnumerator` enumerator with given range from `self` iterating forever (infinite set).
 
-## `RecurringDateEnumerator`
+## `RecurringDate::Enumerator`
 
 The enumerator implements bunch of chainable methods to provide simple DSL for selecting wanted recursion pattern.
 
@@ -46,15 +46,15 @@ The enumerator implements bunch of chainable methods to provide simple DSL for s
 
 ###### NOTE
 
-* There is a method `RecurringDateEnumerator.eternity` that returns `RecurringDateEnumerator` instance that iterates perpetualy over every day after _1970-01-01_.
-* The `RecurringDateEnumerator.from(date)` method does the same, but from `date`.
+* There is a method `RecurringDate::Enumerator.eternity` that returns `RecurringDateEnumerator` instance that iterates perpetualy over every day after _1970-01-01_.
+* The `RecurringDate::Enumerator.from(date)` method does the same, but from `date`.
 * Every enumerator method (except `select`, `select_with_index`, `reject`, `take`, `take_while` and `until`) has a corresponding method with `not_` prefix.
 * For `rails` models the pattern can be used to select records, like: `Model.where('column::date IN (?)', dates)`.
 
 ## Example
 
     require 'recurring_date'
-    rule = RecurringDateEnumerator.eternity
+    rule = RecurringDate::Enumerator.eternity
     rule.wday(5).mweek(1)                         # => enumerator of all first Fridays of a month
     rule.pattern(2).until(Date.new(2020, 8, 1))   # => enumerator of every second day until 2020-08-01
     rule.wday(6,0).mweek(2,4).take(8)             # => enumerator of next four 2nd and 4th weekends of a month

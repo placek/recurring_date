@@ -1,6 +1,4 @@
-require_relative 'spec_helper'
-
-describe Date do
+RSpec.describe Date do
   describe '#mweek' do
     subject { date.mweek }
 
@@ -18,15 +16,15 @@ describe Date do
   end
 
   describe '#to_enum' do
-    before { allow(RecurringDateEnumerator).to receive(:new).and_call_original }
+    before { allow(RecurringDate::Enumerator).to receive(:new).and_call_original }
     let(:date) { Date.new(2017, 4, 28) }
     subject { date.to_enum }
 
     it { is_expected.to be_a(Enumerator) }
-    it { is_expected.to be_a(RecurringDateEnumerator) }
+    it { is_expected.to be_a(RecurringDate::Enumerator) }
     it do
       subject
-      expect(RecurringDateEnumerator).to have_received(:new)
+      expect(RecurringDate::Enumerator).to have_received(:new)
     end
   end
 end
