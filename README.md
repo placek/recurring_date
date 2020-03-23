@@ -1,6 +1,8 @@
 # recurring_date
 
+[![Gem Version](https://badge.fury.io/rb/recurring_date.svg)](https://badge.fury.io/rb/recurring_date)
 [![Build Status](https://travis-ci.org/placek/recurring_date.svg?branch=master)](https://travis-ci.org/placek/recurring_date)
+[![Maintainability](https://api.codeclimate.com/v1/badges/8b2339034c78677126e7/maintainability)](https://codeclimate.com/github/placek/recurring_date/maintainability)
 
 Iterate over a set of dates, giving an iteration conditions.
 
