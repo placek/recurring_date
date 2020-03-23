@@ -3,14 +3,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'recurring_date/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'recurring_date'
-  spec.version       = RecurringDate::VERSION
-  spec.authors       = ['Paweł Placzyński']
-  spec.email         = ['placzynski.pawel@gmail.com']
+  spec.name        = 'recurring_date'
+  spec.version     = RecurringDate::VERSION
+  spec.authors     = ['Paweł Placzyński']
+  spec.email       = ['placzynski.pawel@gmail.com']
 
-  spec.summary       = %q{Recurring dates enumerator}
-  spec.description   = %q{Enumerator for recurring dates with specific patterns}
-  spec.homepage      = 'https://gitlab.binarapps.com/placek/recurring_date'
+  spec.summary     = %q{Dates enumerator with conditions}
+  spec.description = %q{Iterate over a set of dates, giving an iteration conditions.}
+  spec.homepage    = 'https://gitlab.binarapps.com/placek/recurring_date'
 
   if spec.respond_to?(:metadata)
     spec.metadata['homepage_uri']    = spec.homepage

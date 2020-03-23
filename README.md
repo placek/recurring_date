@@ -1,21 +1,42 @@
 # recurring_date
 
-This gem provides an enumerator `RecurringDateEnumerator`, selecting specific dates due to the recursion pattern.
+Iterate over a set of dates, giving an iteration conditions.
 
-`RecurringDateEnumerator` is lazy so pattern can be applied to an infinite set of dates.
+This gem provides an enumerator `RecurringDate::Enumerator`, selecting specific dates due to the recursion pattern.
+
+`RecurringDate::Enumerator` is lazy so pattern can be applied to an infinite set of dates.
 
 The enumerator operates on objects that implements the `Enumerator#each` and yields `Date`.
 
-## `RecurringDate`
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'recurring_date'
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install recurring_date
+
+## Usage
+
+
+### `RecurringDate`
 
 `RecurringDate` module adds two methods to class `Date`:
 
 | Method     | Description
 |------------|-------------
 | `#mweek`   | Returns a number - n'th occurence of the week day in the month.
-| `#to_enum` | Returns `RecurringDateEnumerator` enumerator with given range from `self` iterating forever (infinite set).
+| `#to_enum` | Returns `RecurringDate::Enumerator` enumerator with given range from `self` iterating forever (infinite set).
 
-## `RecurringDate::Enumerator`
+### `RecurringDate::Enumerator`
 
 The enumerator implements bunch of chainable methods to provide simple DSL for selecting wanted recursion pattern.
 
@@ -51,11 +72,21 @@ The enumerator implements bunch of chainable methods to provide simple DSL for s
 * Every enumerator method (except `select`, `select_with_index`, `reject`, `take`, `take_while` and `until`) has a corresponding method with `not_` prefix.
 * For `rails` models the pattern can be used to select records, like: `Model.where('column::date IN (?)', dates)`.
 
-## Example
+### Example
 
     require 'recurring_date'
     rule = RecurringDate::Enumerator.eternity
-    rule.wday(5).mweek(1)                         # => enumerator of all first Fridays of a month
-    rule.pattern(2).until(Date.new(2020, 8, 1))   # => enumerator of every second day until 2020-08-01
-    rule.wday(6,0).mweek(2,4).take(8)             # => enumerator of next four 2nd and 4th weekends of a month
-    rule.to_a                                     # => array of `Date` instances (be careful - it can be infinite)
+    rule.wday(5).mweek(1)                       # => enumerator of all first Fridays of a month
+    rule.pattern(2).until(Date.new(2020, 8, 1)) # => enumerator of every second day until 2020-08-01
+    rule.wday(6,0).mweek(2,4).take(8)           # => enumerator of next four 2nd and 4th weekends of a month
+    rule.to_a                                   # => array of `Date` instances (be careful - it can be infinite)
+
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `lib/recurring_date/version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/placek/recurring_date.
