@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary     = %q{Dates enumerator with conditions}
   spec.description = %q{Iterate over a set of dates, giving an iteration conditions.}
-  spec.homepage    = 'https://github.com/placek/recurring_date'
+  spec.homepage    = 'https://rubygems.org/gems/recurring_date'
 
   if spec.respond_to?(:metadata)
     spec.metadata['homepage_uri']    = spec.homepage
