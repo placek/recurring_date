@@ -2,135 +2,143 @@
 
 RSpec.describe RecurringDate::Enumerator do
   let(:enumerator) { described_class.new(range) }
-  let(:range)      { Date.new(2017, 3, 1)..Date.new(2018, 4, 1) }
+  let(:start_date) { Date.new(1970) }
+  let(:end_date)   { Date.today }
+  let(:range)      { start_date..end_date }
 
   it { expect(enumerator).to be_a(Enumerator) }
   it { expect(enumerator).to be_a(RecurringDate::Enumerator) }
 
   describe '#year' do
-    subject { enumerator.year(2017).to_a }
+    let(:value) { rand(1970..Date.today.year) }
+    subject     { enumerator.year(value).to_a }
 
-    it { expect(subject.map(&:year)).to all(eq(2017)) }
+    it { expect(subject.map(&:year)).to all(eq(value)) }
   end
 
   describe '#month' do
-    subject { enumerator.month(4).to_a }
+    let(:value) { rand(1..12) }
+    subject     { enumerator.month(value).to_a }
 
-    it { expect(subject.map(&:month)).to all(eq(4)) }
+    it { expect(subject.map(&:month)).to all(eq(value)) }
   end
 
   describe '#mweek' do
-    subject { enumerator.mweek(3).to_a }
+    let(:value) { rand(1..5) }
+    subject     { enumerator.mweek(value).to_a }
 
-    it { expect(subject.map(&:mweek)).to all(eq(3)) }
+    it { expect(subject.map(&:mweek)).to all(eq(value)) }
   end
 
   describe '#wday' do
-    subject { enumerator.wday(5).to_a }
+    let(:value) { rand(0..6) }
+    subject     { enumerator.wday(value).to_a }
 
-    it { expect(subject.map(&:wday)).to all(eq(5)) }
+    it { expect(subject.map(&:wday)).to all(eq(value)) }
   end
 
   describe '#mday' do
-    subject { enumerator.mday(15).to_a }
+    let(:value) { rand(1..31) }
+    subject     { enumerator.mday(value).to_a }
 
-    it { expect(subject.map(&:mday)).to all(eq(15)) }
+    it { expect(subject.map(&:mday)).to all(eq(value)) }
   end
 
   describe '#yday' do
-    subject { enumerator.yday(150).to_a }
+    let(:value) { rand(1..366) }
+    subject     { enumerator.yday(value).to_a }
 
-    it { expect(subject.map(&:yday)).to all(eq(150)) }
+    it { expect(subject.map(&:yday)).to all(eq(value)) }
   end
 
   describe '#not_year' do
-    subject { enumerator.not_year(2017).to_a }
+    let(:value) { rand(1970..Date.today.year) }
+    subject     { enumerator.not_year(value).to_a }
 
-    it { expect(subject.map(&:year).uniq).to eq([2018]) }
+    it { is_expected.to all(satisfy { |date| date.year != value }) }
   end
 
   describe '#not_month' do
-    subject { enumerator.not_month(4).to_a }
+    let(:value) { rand(1..12) }
+    subject     { enumerator.not_month(value).to_a }
 
-    it { expect(subject.map(&:month).uniq).to eq([3, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2]) }
+    it { is_expected.to all(satisfy { |date| date.month != value }) }
   end
 
   describe '#not_mweek' do
-    subject { enumerator.not_mweek(3).to_a }
+    let(:value) { rand(1..5) }
+    subject     { enumerator.not_mweek(value).to_a }
 
-    it { expect(subject.map(&:mweek).uniq).to eq([1, 2, 4, 5]) }
+    it { is_expected.to all(satisfy { |date| date.mweek != value }) }
   end
 
   describe '#not_wday' do
-    subject { enumerator.not_wday(5).to_a }
+    let(:value) { rand(0..6) }
+    subject     { enumerator.not_wday(value).to_a }
 
-    it { expect(subject.map(&:wday).uniq).to eq([3, 4, 6, 0, 1, 2]) }
+    it { is_expected.to all(satisfy { |date| date.wday != value }) }
   end
 
   describe '#not_mday' do
-    subject { enumerator.not_mday(15).to_a }
+    let(:value) { rand(1..31) }
+    subject     { enumerator.not_mday(value).to_a }
 
-    it do
-      expect(subject.map(&:mday).uniq).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16,
-                                              17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31])
-    end
+    it { is_expected.to all(satisfy { |date| date.mday != value }) }
   end
 
   describe '#not_yday' do
-    subject { enumerator.not_yday(150).to_a }
+    let(:value) { rand(1..31) }
+    subject     { enumerator.not_yday(value).to_a }
 
-    it { expect(subject.map(&:yday).uniq.any? { |e| e == 150 }).to eq(false) }
+    it { is_expected.to all(satisfy { |date| date.yday != value }) }
   end
 
   describe '#take' do
-    subject { enumerator.take(10).to_a }
+    let(:count) { rand(5..99) }
+    subject     { enumerator.take(count).to_a }
 
-    it { expect(subject.count).to eq(10) }
+    it { expect(subject.count).to eq(count) }
   end
 
   describe '#take_while' do
-    subject { enumerator.take_while { |d| d.month < 12 }.to_a }
+    let(:value) { rand(1..12) }
+    subject     { enumerator.take_while { |d| d.month < value }.to_a }
 
-    it { expect(subject.count).to eq(275) }
-    it { expect(subject.map(&:year).uniq).to eq([2017]) }
-    it { expect(subject.map(&:month).uniq).to eq([3, 4, 5, 6, 7, 8, 9, 10, 11]) }
+    it { is_expected.to all(satisfy { |date| date.month < value }) }
   end
 
   describe '#select' do
-    subject { enumerator.select { |d| d.month < 12 }.to_a }
+    let(:value) { rand(1..12) }
+    subject     { enumerator.select { |d| d.month < value }.to_a }
 
-    it { expect(subject.count).to eq(366) }
-    it { expect(subject.map(&:year).uniq).to eq([2017, 2018]) }
-    it { expect(subject.map(&:month).uniq).to eq([3, 4, 5, 6, 7, 8, 9, 10, 11, 1, 2]) }
+    it { is_expected.to all(satisfy { |date| date.month < value }) }
   end
 
   describe '#select_with_index' do
-    subject { enumerator.select_with_index { |_d, i| i % 3 == 0 }.to_a }
+    let(:arg) { rand(1..100) }
+    subject   { enumerator.select_with_index { |_d, i| i % arg == 0 }.to_a }
 
-    it { expect(subject.count).to eq(133) }
-    it { expect(subject.map(&:year).uniq).to eq([2017, 2018]) }
-    it { expect(subject.map(&:month).uniq).to eq([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2]) }
+    it { is_expected.to all(satisfy { |date| (date - start_date) % arg == 0 }) }
   end
 
   describe '#reject' do
-    subject { enumerator.reject { |d| d.month < 12 }.to_a }
+    let(:value) { rand(1..12) }
+    subject     { enumerator.reject { |d| d.month < value }.to_a }
 
-    it { expect(subject.count).to eq(31) }
-    it { expect(subject.map(&:year).uniq).to eq([2017]) }
-    it { expect(subject.map(&:month).uniq).to eq([12]) }
+    it { is_expected.to all(satisfy { |date| date.month >= value }) }
   end
 
   describe '#until' do
-    subject { enumerator.until(Date.new(2018, 5, 1)).to_a }
+    let(:date) { range.to_a.sample }
+    subject    { enumerator.until(date).to_a }
 
-    it { expect(subject).to all(be <= Date.new(2018, 5, 1)) }
+    it { expect(subject).to all(be <= date) }
   end
 
   describe '#pattern' do
-    subject { enumerator.pattern(3, 5).to_a }
+    let(:args) { Array.new(rand(1..10)) { rand(1..100) }.uniq }
+    subject    { enumerator.pattern(*args).to_a }
 
-    it { expect(subject.count).to eq(185) }
-    it { expect(subject.map(&:year).uniq).to eq([2017, 2018]) }
-    it { expect(subject.map(&:month).uniq).to eq([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2]) }
+    it { is_expected.to all(satisfy { |date| args.any? { |arg| (date - start_date + 1) % arg == 0 } }) }
   end
 end
