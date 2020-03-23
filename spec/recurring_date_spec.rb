@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Date do
   describe '#mweek' do
     subject { date.mweek }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'recurring_date/enumerator'
 
 module RecurringDate

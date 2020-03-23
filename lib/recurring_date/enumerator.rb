@@ -1,14 +1,14 @@
+# frozen_string_literal: true
+
 require 'date'
 
 module RecurringDate
   class Enumerator < ::Enumerator
     def initialize(range)
       super() do |result|
-        begin
-          range.each { |val| block_given? ? yield(result, val) : result << val }
-        rescue ::StopIteration
-          nil
-        end
+        range.each { |val| block_given? ? yield(result, val) : result << val }
+      rescue ::StopIteration
+        nil
       end
     end
 
@@ -102,10 +102,11 @@ module RecurringDate
       RecurringDate::Enumerator.new(self) { |result, value| result << value unless yield(value) }
     end
 
-    def take(n)
-      taken = n
+    def take(number)
+      taken = number
       RecurringDate::Enumerator.new(self) do |result, value|
         raise ::StopIteration if taken.zero?
+
         result << value
         taken -= 1
       end
@@ -114,6 +115,7 @@ module RecurringDate
     def take_while
       RecurringDate::Enumerator.new(self) do |result, value|
         raise ::StopIteration unless yield(value)
+
         result << value
       end
     end

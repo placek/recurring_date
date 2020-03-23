@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe RecurringDate::Enumerator do
   let(:enumerator) { described_class.new(range) }
   let(:range)      { Date.new(2017, 3, 1)..Date.new(2018, 4, 1) }

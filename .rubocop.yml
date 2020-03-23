@@ -1,39 +1,20 @@
 AllCops:
-  Include:
-    - '**/Gemfile'
   Exclude:
     - '**/Gemfile*'
     - '**/*.gemspec'
-  TargetRubyVersion: 2.3
-Style/WhileUntilModifier:
-  MaxLineLength: 120
-Style/WhileUntilModifier:
-  MaxLineLength: 120
-Metrics/LineLength:
+    - 'bin/*'
+  TargetRubyVersion: 2.6.5
+Layout/LineLength:
   Max: 120
-Metrics/MethodLength:
-  Max: 25
-Metrics/AbcSize:
-  Max: 50
 Metrics/ClassLength:
   Enabled: false
 Metrics/BlockLength:
   Enabled: false
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
 Style/Documentation:
-  Enabled: false
-Style/AlignParameters:
-  EnforcedStyle: with_fixed_indentation
-Style/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
-Style/DotPosition:
-  EnforcedStyle: trailing
-Style/MultilineHashBraceLayout:
-  Enabled: false
-Style/Lambda:
-  Enabled: false
-Style/CharacterLiteral:
-  Enabled: false
-Style/CharacterLiteral:
-  Enabled: false
-Style/FrozenStringLiteralComment:
   Enabled: false
