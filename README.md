@@ -46,7 +46,7 @@ The enumerator implements bunch of chainable methods to provide simple DSL for s
 
 ###### NOTE
 
-* There is a method `RecurringDate::Enumerator.eternity` that returns `RecurringDateEnumerator` instance that iterates perpetualy over every day after _1970-01-01_.
+* There is a method `RecurringDate::Enumerator.eternity` that returns `RecurringDate::Enumerator` instance that iterates perpetualy over every day after _1970-01-01_.
 * The `RecurringDate::Enumerator.from(date)` method does the same, but from `date`.
 * Every enumerator method (except `select`, `select_with_index`, `reject`, `take`, `take_while` and `until`) has a corresponding method with `not_` prefix.
 * For `rails` models the pattern can be used to select records, like: `Model.where('column::date IN (?)', dates)`.
