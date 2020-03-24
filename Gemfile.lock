@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    recurring_date (0.1.4)
+    recurring_date (0.1.5)
 
 GEM
   remote: https://rubygems.org/

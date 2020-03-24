@@ -10,7 +10,7 @@ RSpec.describe Date do
      4, 4, 4, 4, 4, 4, 4,
      5, 5, 5].each_with_index do |element, index|
       context "mday is #{index + 1}" do
-        let(:date) { Date.new(rand(1970..2020), [1,3,5,7,8,10,12].sample, index + 1) }
+        let(:date) { Date.new(rand(1970..2020), [1, 3, 5, 7, 8, 10, 12].sample, index + 1) }
 
         it { is_expected.to eq(element) }
       end
@@ -24,6 +24,9 @@ RSpec.describe Date do
 
     it { is_expected.to be_a(Enumerator) }
     it { is_expected.to be_a(RecurringDate::Enumerator) }
-    it { subject; expect(RecurringDate::Enumerator).to have_received(:new) }
+    it do
+      subject
+      expect(RecurringDate::Enumerator).to have_received(:new)
+    end
   end
 end
