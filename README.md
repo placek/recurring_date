@@ -30,6 +30,7 @@ Or install it yourself as:
 
 ## Usage
 
+See [documentation](https://www.rubydoc.info/gems/recurring_date) for details.
 
 ### `RecurringDate`
 
